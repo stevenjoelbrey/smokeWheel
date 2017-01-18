@@ -134,23 +134,38 @@ shinyServer(function(input, output) {
     
     col   <- regionColors[infoNeededIndex]
 
-    # draw the histogram with the specified number of bins
-    chordDiagram(smoke_migration, 
-                 grid.col=col,
-                 grid.border = NULL,
-                 transparency=0.05,
-                 directional = 1,
-                 direction.type = c("arrows", "diffHeight"),
-                 link.arr.type = "big.arrow",#"curved",
-                 link.arr.length=0.06,
-                 annotationTrack = c("grid"), # "name", "grid", "axis"
-                 link.sort = TRUE,
-                 diffHeight = .1,
-                 link.border=adjustcolor('black', alpha.f = 0.4) # outlines the arrows that go between regions
-    )
     
-    print("The plot has been created")
-
+    if(input$border=="yes"){
+      
+      chordDiagram(smoke_migration, 
+                   grid.col=col,
+                   transparency=0.05,
+                   directional = 1,
+                   direction.type = c("arrows", "diffHeight"),
+                   link.arr.type = "big.arrow",#"curved",
+                   link.arr.length=0.06,
+                   annotationTrack = c("name", "grid", "axis"), # "name", "grid", "axis"
+                   link.sort = TRUE,
+                   diffHeight = .1,
+                   link.border=adjustcolor('black', alpha.f = 0.4)) # outlines the arrows that go between regions
+      
+    } else {
+    
+      # draw the histogram with the specified number of bins
+      chordDiagram(smoke_migration, 
+                   grid.col=col,
+                   grid.border = NULL,
+                   transparency=0.05,
+                   directional = 1,
+                   direction.type = c("arrows", "diffHeight"),
+                   link.arr.type = "big.arrow",#"curved",
+                   link.arr.length=0.06,
+                   annotationTrack = c("grid"), # "name", "grid", "axis"
+                   link.sort = TRUE,
+                   diffHeight = .1,
+                   link.border=adjustcolor('black', alpha.f = 0.4))
+    }
+      
   })
   
   

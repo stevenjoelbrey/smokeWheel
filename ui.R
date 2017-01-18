@@ -22,6 +22,9 @@ shinyUI(pageWithSidebar(
     radioButtons("metData", "Meteorology Data:", c("gdas1", "edas40"), 
                  selected = "gdas1", inline = TRUE),
     
+    radioButtons("border", "Show Border:", c("yes", "no"), 
+                 selected = "yes", inline = TRUE),
+    
     checkboxGroupInput("usedRegions", "Regions to include:",
                        c("Northeast" = "NorthEast",                 
                          "Mid Atlantic" = "MidAtlantic",              
@@ -30,8 +33,8 @@ shinyUI(pageWithSidebar(
                          "Southern Plains"=  "SouthernPlains",
                          "Great Plains"=  "GreatPlains",
                          "Rocky Mountains" =  "RockyMountains", 
-                         "South West" = "SouthWest" ,
-                         "North West"     =  "NorthWest",    
+                         "Southwest" = "SouthWest" ,
+                         "Northwest"     =  "NorthWest",    
                          "Alaska"           =  "Alaska",
                          "Mexico" =  "Mexico",                  
                          "Quebec"  =  "Quebec",     
@@ -54,24 +57,22 @@ shinyUI(pageWithSidebar(
                                   "RockyMountains", "SouthWest", "NorthWest"),
                        inline = FALSE),
     
-    h5("Select years for June-September smoke climatology"),
-    
-    br(),
-    
     h5("Created by:"),
     tags$a("Steven Brey | Ph.D. Student", 
-           href="https://github.com/stevenjoelbrey"),
-    h5("For details on how data is generated"),
-    tags$a("Please See publication", 
-           href="http://agupubs.onlinelibrary.wiley.com/hub/jgr/journal/10.1002/(ISSN)2156-2202/"),
+           href="http://atmos.colostate.edu/~sjbrey/"),
+    br(),
+    tags$a("Source code", 
+            href="https://github.com/stevenjoelbrey/smokeWheel"),
     h5(textOutput("counter"))
     
   ),
   
   # Show a table summarizing the values entered
   mainPanel(
-  
-    checkboxGroupInput("years", "Years to include:",
+    
+    #img(src = "regionMap.pdf", height = 170, width = 200, align="right"),
+    
+    checkboxGroupInput("years", "Years to include in June-Sept climatology:",
                        c("2007" = "2007",                 
                          "2008" = "2008",              
                          "2009" =  "2009",              
@@ -85,7 +86,7 @@ shinyUI(pageWithSidebar(
                                   "2012", "2013", "2014"),
                        inline = TRUE),
     
-    plotOutput("smokeTransport", width="800px", height="800px")
+    plotOutput("smokeTransport", width="750px", height="750px")
 
     # TODO: Add a figure that plots the slected regions with the color
     # TODO: that matches the arrows. This will be the legend. 
